@@ -46,11 +46,13 @@
             android:onClick="increment"/>
 
     </LinearLayout>
+
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/order_summary_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price"
+        android:text="Order Summary"
+        android:textAllCaps="true"
         android:textSize="16sp"
         android:textColor="@android:color/black"
         android:paddingTop="16dp"/>
