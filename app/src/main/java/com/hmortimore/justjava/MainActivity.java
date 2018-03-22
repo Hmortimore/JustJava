@@ -11,6 +11,7 @@ package com.hmortimore.justjava;
          import android.os.Bundle;
          import android.support.v7.app.AppCompatActivity;
          import android.view.View;
+         import android.widget.CheckBox;
          import android.widget.TextView;
          import java.text.NumberFormat;
 
@@ -30,29 +31,38 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int price = calculatePrice();
-        String priceMessage = createOrderSummary(price);
-        displayMessage(priceMessage);
+        CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_Cream_checkbox);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
 
+        CheckBox chocolateCheckBox = findViewById(R.id.chocolate_checkbox);
+        boolean hasChocolate = chocolateCheckBox.isChecked();
+
+        int price = calculatePrice();
+        String priceMessage = createOrderSummary(price, hasWhippedCream, hasChocolate);
+        displayMessage(priceMessage);
     }
 
-    /**
-     * Calculates the price of the order.
-     * @return total price
-     */
     private int calculatePrice() {
         int price = quantity * 5;
         return price;
     }
 
     /**
+     * Calculates the price of the order.
+     * @return total price
+     * @param addWhippedCream is whether or not the user wants whipped cream topping
+     * @param addChocolate is whether or not the user wants to add chocolate
+     *
+    /**
      * Calculates the price of the order
      */
-    private String createOrderSummary(int price) {
+    private String createOrderSummary(int price, boolean addWhippedCream, boolean addChocolate) {
         String priceMessage = "\nName: Hailey Mortimore";
-        priceMessage = priceMessage + "\nQuantity: " + quantity;
-        priceMessage = priceMessage + "\nTotal: $" + price;
-        priceMessage = priceMessage + "\nThank you!";
+        priceMessage +="\nAdd Whipped Cream? " + addWhippedCream;
+        priceMessage +="\nAdd Chocolate? " + addChocolate;
+        priceMessage +="\nQuantity: " + quantity;
+        priceMessage +="\nTotal: $" + price;
+        priceMessage +="\nThank you!";
         return priceMessage;
     }
 
@@ -94,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given price on the screen.
      */
     private void displayPrice(int number) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view;
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
         orderSummaryTextView.setText(NumberFormat.getCurrencyInstance().format(number));
 
     }
